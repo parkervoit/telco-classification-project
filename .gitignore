@@ -1,0 +1,8 @@
+.DS_store
+.ipynb_checkpoints/
+__pycache__/
+titanic.csv
+iris.csv
+env.py
+*.xlsx
+*lesson.ipynb
