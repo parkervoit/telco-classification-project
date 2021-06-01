@@ -21,6 +21,15 @@ def encode_values(df):
     for x in df.columns:
         df[x] = label_encoder.fit_transform(df[x])
     return df
+def get_info(df):
+    '''
+    Takes in a dataframe and returns .info, .describe, and .head()
+    '''
+    print(df.info())
+    print('')
+    print(df.describe())
+    print('')
+    return df.head()
 
 def train_validate_test_split(df, target, seed=123):
     '''
