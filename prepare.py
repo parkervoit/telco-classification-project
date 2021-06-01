@@ -2,6 +2,25 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+def clean_churn(df):
+    '''
+    Takes in the churn dataframe and drops cust id, payment id, contract id, and service type id. 
+    Returns the dataframe with null values replaced with 0.00 as a float in the total_charges column. 
+    '''
+    df['total_charges'] = df['total_charges'].str.replace(' ', '0.00').astype('float64')
+    df.drop(['customer_id', 'payment_type_id','contract_type_id','internet_service_type_id'], axis = 1, inplace = True)
+    return df
+
+def encode_values(df):
+    '''
+    Takes a dataframe and returns a new dataframe with encoded categorical variables
+    '''
+    label_encoder = LabelEncoder()
+    for x in df.columns:
+        df[x] = label_encoder.fit_transform(df[x])
+    return df
 
 def train_validate_test_split(df, target, seed=123):
     '''
